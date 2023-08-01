@@ -31,7 +31,8 @@ const AuthController = {
             });
             return res.json({ msg: 'Register Berhasil' });
         } catch (error) {
-            return res.status(500).json({ error });
+            msg = error.errors;
+            return res.status(500).json({ msg });
         }
     },
 

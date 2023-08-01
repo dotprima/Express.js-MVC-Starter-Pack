@@ -17,6 +17,10 @@ const config = {
         jwt: process.env.JWT_KEY,
         time: process.env.JWT_TIME,
     },
+    server: {
+        url: process.env.WEB_URL,
+        port: process.env.WEB_PORT,
+    },
 };
 
 module.exports = config;
