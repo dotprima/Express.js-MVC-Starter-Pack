@@ -1,21 +1,19 @@
-const User = require('../models/Users');
-const {jwt,bcrypt,key} = require('../kernel/app');
-
 const { validationResult } = require('express-validator');
+const User = require('../models/Users');
+const { jwt, bcrypt, key } = require('../kernel/app');
 
 const AuthController = {
 
-    index: async function (req, res, next) {
+    async index(req, res) {
         try {
             const users = await User.findAll({ limit: 10 });
             res.json(users);
         } catch (error) {
-            console.error('Error fetching users:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     },
 
-    register: async function (req, res, next) {
+    async register(req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             // Jika ada error validasi, kirimkan respon dengan status 422 dan daftar error
@@ -28,16 +26,16 @@ const AuthController = {
         try {
             await User.create({
                 NamaDepan: username,
-                email: email,
-                password: hashPassword
+                email,
+                password: hashPassword,
             });
-            res.json({ msg: "Register Berhasil" });
+            return res.json({ msg: 'Register Berhasil' });
         } catch (error) {
-            res.status(500).json({ error: error });
+            return res.status(500).json({ error });
         }
     },
 
-    login: async function (req, res, next) {
+    async login(req, res) {
         const { email, password } = req.body;
 
         const errors = validationResult(req);
@@ -61,9 +59,9 @@ const AuthController = {
 
             // Jika email dan password cocok, buat token JWT
             const token = jwt.sign({ userId: user.id }, key.jwt, { expiresIn: key.time });
-            res.json({ token });
+            return res.json({ token });
         } catch (error) {
-            res.status(500).json({ error: 'Internal Server Error' });
+            return res.status(500).json({ error: 'Internal Server Error' });
         }
     },
 };

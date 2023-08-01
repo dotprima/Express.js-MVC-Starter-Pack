@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
     /**
      * Menjalankan migrasi untuk membuat tabel "users".
@@ -96,8 +94,6 @@ module.exports = {
                 allowNull: true,
             },
         });
-
-       
     },
 
     /**
@@ -105,9 +101,8 @@ module.exports = {
      * @param {import('sequelize').QueryInterface} queryInterface
      * @param {import('sequelize')} Sequelize
      */
-    async down(queryInterface, Sequelize) {
-    
-        // Hapus tabel "users"
+    async down(queryInterface) {
+    // Hapus tabel "users"
         await queryInterface.dropTable('users');
     },
 };

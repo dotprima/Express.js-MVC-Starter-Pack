@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const config = {
     db: {
@@ -15,8 +15,8 @@ const config = {
     },
     key: {
         jwt: process.env.JWT_KEY,
-        time: process.env.JWT_TIME
-    }
+        time: process.env.JWT_TIME,
+    },
 };
 
 module.exports = config;
