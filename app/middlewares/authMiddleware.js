@@ -1,5 +1,4 @@
-const jwt = require('jsonwebtoken');
-const key = require('../../config/Database').key; 
+const {jwt,key} = require('../kernel/app');
 // Middleware otentikasi JWT
 const authMiddleware = (req, res, next) => {
   const token = req.header('Authorization'); // Ambil token dari header Authorization
